@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communicator.cs" />
     <Compile Include="MachineFactory.cs" />
     <Compile Include="Machines\Machine.cs" />
     <Compile Include="Machines\MachineB.cs" />

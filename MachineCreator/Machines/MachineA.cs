@@ -1,18 +1,21 @@
 ﻿using System;
-using System.IO.Ports;
 
 namespace MachineCreator.Machines
 {
     class MachineA : Machine
     {
-        public MachineA(SerialPort port) : base(port)
+        public MachineA(Communicator com) : base(com)
         {
         }
 
         public override void Action1()
         {
-            Console.WriteLine("Machine A Action 1");
-            Console.WriteLine($"Port open: {Port.IsOpen}");
+            Com.QueueRequest("Sample Request", HandleResponseAction1);
+        }
+
+        private void HandleResponseAction1(string result)
+        {
+            Console.WriteLine($"Response for Machine A from Action 1: {result}");
         }
     }
 }

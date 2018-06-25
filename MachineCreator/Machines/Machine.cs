@@ -4,11 +4,11 @@ namespace MachineCreator.Machines
 {
     public abstract class Machine
     {
-        protected readonly SerialPort Port;
+        protected readonly Communicator Com;
 
-        public Machine(SerialPort port)
+        protected Machine(Communicator com)
         {
-            Port = port;
+            Com = com;
         }
 
        public abstract void Action1();

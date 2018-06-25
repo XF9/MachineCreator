@@ -8,31 +8,25 @@ namespace MachineCreator
     {
         private static MachineFactory _instance;
 
-        private readonly SerialPort _port;
+        private readonly Communicator _com;
         private readonly Machine _currentMachine;
 
         private MachineFactory()
         {
-            _port = new SerialPort();
-            // create Port here
+            _com = new Communicator();
 
             var enviromentVariable = "A";
             switch (enviromentVariable)
             {
                 case "A":
-                    _currentMachine = new MachineA(_port);
+                    _currentMachine = new MachineA(_com);
                     break;
                 case "B":
-                    _currentMachine = new MachineB(_port);
+                    _currentMachine = new MachineB(_com);
                     break;
                 default:
                     throw new NotSupportedException();
             }
-        }
-
-        ~MachineFactory()
-        {
-            _port.Close();
         }
 
         public static Machine GetCurrentMachine()
@@ -41,6 +35,14 @@ namespace MachineCreator
                 _instance = new MachineFactory();
 
             return _instance._currentMachine;
+        }
+
+        public static Communicator GetCurrentMachineCommmunicator()
+        {
+            if (_instance == null)
+                _instance = new MachineFactory();
+
+            return _instance._com;
         }
     }
 }
